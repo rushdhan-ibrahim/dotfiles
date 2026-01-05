@@ -29,8 +29,15 @@ input=$(cat)
 # Parse JSON fields with defaults
 MODEL=$(echo "$input" | jq -r '.model.display_name // "Claude"')
 DIR=$(echo "$input" | jq -r '.workspace.current_dir // "~"')
-CONTEXT_USED=$(echo "$input" | jq -r '.current_usage.context_window_used // 0')
-CONTEXT_MAX=$(echo "$input" | jq -r '.current_usage.context_window_max // 200000')
+
+# Context window: sum input + cache tokens for total usage
+CONTEXT_USED=$(echo "$input" | jq -r '
+  .context_window.current_usage as $u |
+  if $u then
+    (($u.input_tokens // 0) + ($u.cache_creation_input_tokens // 0) + ($u.cache_read_input_tokens // 0))
+  else 0 end
+')
+CONTEXT_MAX=$(echo "$input" | jq -r '.context_window.context_window_size // 200000')
 IS_BUSY=$(echo "$input" | jq -r '.is_busy // false')
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -132,8 +139,8 @@ if [ -n "$BRANCH" ]; then
     OUTPUT="${OUTPUT}  ${ROSE} ${BRANCH}${GIT_STATUS}${RESET}"
 fi
 
-# Context usage indicator
-OUTPUT="${OUTPUT}  ${CTX_COLOR}${CONTEXT_PCT}%%${RESET}"
+# Context usage indicator (with icon)
+OUTPUT="${OUTPUT}  ${CTX_COLOR}◐ ${CONTEXT_PCT}%${RESET}"
 
 # Claude face and status
 OUTPUT="${OUTPUT}  ${TEAL}${CLAUDE_FACE}${RESET} ${GRAY}${FACE_STATUS}${RESET}"
