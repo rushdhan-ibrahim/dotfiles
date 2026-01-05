@@ -57,6 +57,9 @@ brew install tmux 2>/dev/null || true
 # brew install --cask kitty 2>/dev/null || true
 # brew install --cask wezterm 2>/dev/null || true
 
+# Phase 6: Shell superpowers
+brew install atuin direnv mise 2>/dev/null || true
+
 # Optional enhancements
 brew install git-delta lazygit btop dust duf 2>/dev/null || true
 
@@ -119,6 +122,10 @@ backup_if_exists ~/.wezterm.lua
 backup_if_exists ~/.gitconfig
 backup_if_exists ~/.gitignore_global
 backup_dir_if_exists ~/.config/lazygit
+backup_dir_if_exists ~/.config/atuin
+backup_if_exists ~/.config/direnv/direnvrc
+backup_if_exists ~/.config/direnv/direnv.toml
+backup_dir_if_exists ~/.config/mise
 print_success "Backups complete"
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -164,6 +171,15 @@ ln -sf "$DOTFILES/git/.gitconfig" ~/.gitconfig
 ln -sf "$DOTFILES/git/.gitignore_global" ~/.gitignore_global
 mkdir -p ~/.config/lazygit
 ln -sf "$DOTFILES/lazygit/config.yml" ~/.config/lazygit/config.yml
+
+# Shell tools (Phase 6)
+mkdir -p ~/.config/atuin
+ln -sf "$DOTFILES/atuin/config.toml" ~/.config/atuin/config.toml
+mkdir -p ~/.config/direnv
+ln -sf "$DOTFILES/direnv/direnvrc" ~/.config/direnv/direnvrc
+ln -sf "$DOTFILES/direnv/direnv.toml" ~/.config/direnv/direnv.toml
+mkdir -p ~/.config/mise
+ln -sf "$DOTFILES/mise/config.toml" ~/.config/mise/config.toml
 
 # Claude Code
 ln -sf "$DOTFILES/claude-code/settings.json" ~/.claude/settings.json
@@ -226,4 +242,10 @@ echo "  • Delta:   Beautiful diffs with Claude theme"
 echo "  • Lazygit: Git TUI (run 'lg' or 'lazygit')"
 echo "  • Aliases: gs, gc, gp, gl, gd, and 50+ more"
 echo "  • Run 'git aliases' to see all available"
+echo ""
+echo "Phase 6 - Shell Superpowers:"
+echo "  • Atuin:  Shell history sync (Ctrl+R for fuzzy search)"
+echo "  • Direnv: Per-directory environments (.envrc)"
+echo "  • Mise:   Version manager (node, python, go)"
+echo "  • Run 'atuin register' to sync history across machines"
 echo ""

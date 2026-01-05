@@ -1,0 +1,179 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Atuin Configuration
+#                         Claude-themed shell history
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Database
+# ══════════════════════════════════════════════════════════════════════════════
+
+## where to store the database
+# db_path = "~/.local/share/atuin/history.db"
+
+## where to store encryption keys
+# key_path = "~/.local/share/atuin/key"
+
+## where to store session token
+# session_path = "~/.local/share/atuin/session"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Behavior
+# ══════════════════════════════════════════════════════════════════════════════
+
+## enable or disable automatic sync
+auto_sync = true
+
+## how often to sync history (in seconds)
+sync_frequency = "5m"
+
+## address of the sync server
+# sync_address = "https://api.atuin.sh"
+
+## enable or disable automatic update checks
+update_check = true
+
+## enable or disable adding commands to history that start with a space
+filter_mode_shell_up_key_binding = "session"
+
+## what style to use for the history list
+## compact: shows just the command
+## full: shows time, exit code, duration, and command
+style = "compact"
+
+## enable or disable exit warning when atuin detects bash is not configured
+# bash_warning = true
+
+## prevents commands matching an entry in the array from being recorded
+history_filter = [
+    "^cd$",
+    "^ls$",
+    "^ll$",
+    "^la$",
+    "^pwd$",
+    "^exit$",
+    "^clear$",
+    "^history$",
+]
+
+## prevents commands run on the host matching patterns in the array from being recorded
+# cwd_filter = []
+
+## Number of context lines to show when searching
+# context_lines = 2
+
+## Configure the maximum height of the preview window
+# max_preview_height = 4
+
+## Invert the UI - put the search bar at the top
+invert = false
+
+## the maximum number of lines the interface should take up
+# inline_height = 0
+
+## enable or disable showing a preview of the selected command
+show_preview = true
+
+## what to do when the escape key is pressed when searching
+## return-hierarchically: first escape clears the input, next escape exits
+## return: escape always exits search
+exit_mode = "return-query"
+
+## possible values: emacs, vim-normal, vim-insert, auto
+## "auto" will attempt to use the mode your shell is in
+keymap_mode = "auto"
+
+## Cursor style in each keymap mode
+keymap_mode_shell = "auto"
+
+## Enable or disable mouse support
+# word_jump_mode = "emacs"
+
+## Enable or disable automatic filtering
+# filter_mode = "global"
+
+## The default filter mode when searching with Ctrl+R
+search_mode = "fuzzy"
+
+## Enable or disable automatic recording
+# record_mode = "enabled"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Search
+# ══════════════════════════════════════════════════════════════════════════════
+
+## Which search mode to use
+## prefix: matches from the start
+## fulltext: matches anywhere (default)
+## fuzzy: fuzzy matching
+## skim: skim-style fuzzy matching
+search_mode_shell_up_key_binding = "prefix"
+
+## Cursor style when in vim-insert mode
+# prefers_reduced_motion = false
+
+## Configure the maximum number of entries to show
+# show_tabs = true
+
+## Show help
+show_help = true
+
+## Enable or disable showing timestamps in the TUI
+# show_tabs = true
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Stats
+# ══════════════════════════════════════════════════════════════════════════════
+
+## Configure stats
+# common_prefix = []
+# common_subcommands = []
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Sync
+# ══════════════════════════════════════════════════════════════════════════════
+
+## Uncomment below to register with the atuin server
+## You will need to run `atuin register` or `atuin login` first
+# sync_address = "https://api.atuin.sh"
+
+## Sync settings
+# records = true
+# sync = { records = true }
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Theme (Claude Colors)
+# ══════════════════════════════════════════════════════════════════════════════
+
+[theme]
+## Name of theme to use - either built-in or from themes directory
+# name = "default"
+
+## Claude color palette for Atuin
+## These are defined using standard terminal colors that map to Claude palette
+## when using a Claude-themed terminal (iTerm, Alacritty, Kitty, WezTerm)
+
+[colors]
+## Base colors are inherited from terminal theme
+## The following semantic colors apply Claude palette through terminal colors:
+##   - Selection/highlight uses terminal selection colors (bg_light #2a2725)
+##   - Text uses terminal foreground (#e8dfd6)
+##   - Accent uses terminal blue/cyan (#8ea4a2 teal)
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Keybindings
+# ══════════════════════════════════════════════════════════════════════════════
+
+[keys]
+scroll_exits = false
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Daemon (if using atuin daemon)
+# ══════════════════════════════════════════════════════════════════════════════
+
+[daemon]
+## Enable daemon mode - keeps atuin running for faster startup
+# enabled = false
+## Socket path for daemon
+# socket_path = "~/.local/share/atuin/atuin.sock"
+## Systemd socket activation
+# systemd_socket = false

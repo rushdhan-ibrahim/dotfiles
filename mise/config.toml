@@ -1,0 +1,88 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Mise Configuration
+#                         Polyglot version manager
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Global Tools
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Default tool versions (global)
+# These are installed and available everywhere unless overridden locally
+
+[tools]
+# Node.js - use LTS version
+node = "lts"
+
+# Python - latest stable
+python = "3.12"
+
+# Go - latest stable
+# go = "latest"
+
+# Rust - use rustup instead for better toolchain management
+# rust = "stable"
+
+# Ruby - latest stable (uncomment if needed)
+# ruby = "latest"
+
+# Java (via temurin) - uncomment if needed
+# java = "temurin-21"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Settings
+# ══════════════════════════════════════════════════════════════════════════════
+
+[settings]
+# Automatically install missing tools when entering a directory
+auto_install = true
+
+# Check for new versions less frequently (in hours)
+fetch_remote_versions_timeout = "24h"
+
+# Always keep this many versions of each tool
+# keep = 1
+
+# Use .tool-versions files (asdf compatibility)
+asdf_compat = true
+
+# Disable automatic activation message
+quiet = false
+
+# Use verbose output for debugging
+verbose = false
+
+# Plugin shorthand repository
+# plugin_repository = "https://github.com/mise-plugins/registry"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Aliases
+# ══════════════════════════════════════════════════════════════════════════════
+
+[alias.node]
+# Common Node.js version aliases
+lts-iron = "20"
+lts-hydrogen = "18"
+current = "22"
+
+[alias.python]
+# Common Python version aliases
+stable = "3.12"
+legacy = "3.9"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Environment
+# ══════════════════════════════════════════════════════════════════════════════
+
+[env]
+# Global environment variables set by mise
+# MISE_NODE_DEFAULT_PACKAGES_FILE = "~/.default-npm-packages"
+# MISE_PYTHON_DEFAULT_PACKAGES_FILE = "~/.default-python-packages"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Hooks
+# ══════════════════════════════════════════════════════════════════════════════
+
+# [hooks]
+# # Run commands after tool installation
+# post_install = "echo 'Tool installed!'"

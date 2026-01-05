@@ -85,6 +85,10 @@ zinit snippet "$ZSH_LIB/fzf.zsh"
 zinit ice wait'0' lucid
 zinit snippet "$ZSH_LIB/zoxide.zsh"
 
+# Load shell tools (atuin, direnv, mise)
+zinit ice wait'0' lucid
+zinit snippet "$ZSH_LIB/tools.zsh"
+
 # ══════════════════════════════════════════════════════════════════════════════
 #                              Welcome Screen
 # ══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,29 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Direnv Settings
+#                         Per-directory environment management
+# ══════════════════════════════════════════════════════════════════════════════
+
+[global]
+# Warn when .envrc takes longer than this to load (in milliseconds)
+warn_timeout = "5s"
+
+# Load .env files automatically (without explicit dotenv in .envrc)
+load_dotenv = false
+
+# Strict mode - fail on undefined variables
+strict_env = false
+
+# Hide direnv logging by default (set to true for quieter output)
+hide_env_diff = false
+
+[whitelist]
+# Directories that are always trusted (exact match)
+# exact = ["~/Projects"]
+
+# Directories that are trusted via prefix matching
+prefix = [
+    "~/Projects",
+    "~/Code",
+    "~/dev",
+    "~/work",
+]
