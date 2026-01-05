@@ -1,93 +1,109 @@
 # ══════════════════════════════════════════════════════════════════════════════
-#                              PATH Configuration
+#                              ZSH Configuration
+#                    Optimized for speed and productivity
 # ══════════════════════════════════════════════════════════════════════════════
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/Users/$USER/.local/bin:$PATH"
-export PATH="$PATH:/Users/rush/AdmixTools/src"
-export PATH="/Applications/plink_mac_20241022:$PATH"
+# Performance target: <100ms startup time
+# Profile with: time zsh -i -c exit
+# Debug with: zmodload zsh/zprof && zprof
+
+# Define dotfiles location
+DOTFILES="$HOME/dotfiles"
+ZSH_LIB="$DOTFILES/zsh/lib"
 
 # ══════════════════════════════════════════════════════════════════════════════
-#                              Starship Prompt
+#                              Zinit Plugin Manager
 # ══════════════════════════════════════════════════════════════════════════════
-eval "$(starship init zsh)"
+
+# Install zinit if not present
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+if [[ ! -d "$ZINIT_HOME" ]]; then
+    print -P "%F{#d4a27f}Installing zinit...%f"
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" 2>/dev/null
+fi
+source "${ZINIT_HOME}/zinit.zsh"
 
 # ══════════════════════════════════════════════════════════════════════════════
-#                              ZSH Plugins
+#                              Core Modules (Sync)
 # ══════════════════════════════════════════════════════════════════════════════
-# Syntax highlighting - colors as you type
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Autosuggestions - ghost text from history
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6c7086'
+# Load essential configs immediately
+[[ -f "$ZSH_LIB/options.zsh" ]] && source "$ZSH_LIB/options.zsh"
+[[ -f "$ZSH_LIB/keybindings.zsh" ]] && source "$ZSH_LIB/keybindings.zsh"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Prompt (Load Early)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Starship prompt - loads fast, needs to be early
+if command -v starship &>/dev/null; then
+    eval "$(starship init zsh)"
+fi
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Plugins (Lazy Loaded)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Syntax highlighting - load with turbo mode (defer)
+zinit ice wait lucid atinit"zicompinit; zicdreplay"
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Autosuggestions - load with turbo mode
+zinit ice wait lucid atload"_zsh_autosuggest_start"
+zinit light zsh-users/zsh-autosuggestions
+
+# Configure autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#625e5a'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+# Completions from zsh-users (turbo mode)
+zinit ice wait lucid blockf atpull'zinit creinstall -q .'
+zinit light zsh-users/zsh-completions
 
 # ══════════════════════════════════════════════════════════════════════════════
-#                              Better Defaults
+#                              Deferred Modules
 # ══════════════════════════════════════════════════════════════════════════════
-# History settings
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt SHARE_HISTORY          # Share history across sessions
-setopt HIST_IGNORE_DUPS       # Don't record duplicates
-setopt HIST_IGNORE_SPACE      # Don't record commands starting with space
-setopt HIST_VERIFY            # Show command before executing from history
 
-# Directory navigation
-setopt AUTO_CD                # cd into directory just by typing its name
-setopt AUTO_PUSHD             # Push directories onto stack
-setopt PUSHD_IGNORE_DUPS      # Don't push duplicates
+# Load completions after prompt
+zinit ice wait'0' lucid
+zinit snippet "$ZSH_LIB/completions.zsh"
 
-# Completion
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Load aliases
+zinit ice wait'0' lucid
+zinit snippet "$ZSH_LIB/aliases.zsh"
 
-# ══════════════════════════════════════════════════════════════════════════════
-#                              Modern Aliases
-# ══════════════════════════════════════════════════════════════════════════════
-# eza - modern ls replacement
-alias ls='eza --icons --group-directories-first'
-alias ll='eza -la --icons --group-directories-first --git'
-alias la='eza -a --icons --group-directories-first'
-alias lt='eza --tree --level=2 --icons'
-alias lta='eza --tree --level=2 --icons -a'
+# Load functions
+zinit ice wait'0' lucid
+zinit snippet "$ZSH_LIB/functions.zsh"
 
-# bat - modern cat replacement
-alias cat='bat --style=auto'
+# Load FZF config
+zinit ice wait'0' lucid
+zinit snippet "$ZSH_LIB/fzf.zsh"
 
-# Useful shortcuts
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias c='clear'
-alias h='history'
-alias reload='source ~/.zshrc'
-
-# Git shortcuts
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
-alias gl='git log --oneline --graph --decorate -10'
-alias gd='git diff'
-
-# ══════════════════════════════════════════════════════════════════════════════
-#                              Key Bindings
-# ══════════════════════════════════════════════════════════════════════════════
-# Accept autosuggestion with right arrow or Ctrl+E
-bindkey '^e' autosuggest-accept
-bindkey '^[[C' autosuggest-accept
-
-# Search history with up/down arrows
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+# Load zoxide
+zinit ice wait'0' lucid
+zinit snippet "$ZSH_LIB/zoxide.zsh"
 
 # ══════════════════════════════════════════════════════════════════════════════
 #                              Welcome Screen
 # ══════════════════════════════════════════════════════════════════════════════
-# Show neofetch on new terminal windows (skip in VS Code, scripts, etc.)
-if [[ $- == *i* ]] && [[ -z "$VSCODE_INJECTION" ]] && [[ -z "$INSIDE_EMACS" ]]; then
-    neofetch
+
+# Show neofetch on new terminal windows (skip in VS Code, scripts, non-interactive)
+if [[ -o interactive ]] && [[ -z "$VSCODE_INJECTION" ]] && [[ -z "$INSIDE_EMACS" ]] && [[ -z "$TERM_PROGRAM_VERSION" ]]; then
+    if command -v neofetch &>/dev/null; then
+        neofetch
+    fi
 fi
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Compile for Speed
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Recompile zshrc if it changed (background, silent)
+{
+    local zshrc="$HOME/.zshrc"
+    if [[ ! -f "${zshrc}.zwc" ]] || [[ "$zshrc" -nt "${zshrc}.zwc" ]]; then
+        zcompile "$zshrc" 2>/dev/null
+    fi
+} &!
