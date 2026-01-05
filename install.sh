@@ -49,6 +49,9 @@ brew install fzf fd ripgrep zoxide 2>/dev/null || true
 # Phase 2: Neovim
 brew install neovim 2>/dev/null || true
 
+# Phase 3: Tmux
+brew install tmux 2>/dev/null || true
+
 # Optional enhancements
 brew install git-delta lazygit btop dust duf 2>/dev/null || true
 
@@ -102,6 +105,8 @@ backup_dir_if_exists() {
     fi
 }
 backup_dir_if_exists ~/.config/nvim
+backup_dir_if_exists ~/.config/tmux
+backup_if_exists ~/.tmux.conf
 print_success "Backups complete"
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -123,6 +128,18 @@ ln -sfn "$DOTFILES/neofetch" ~/.config/neofetch
 
 # Neovim
 ln -sfn "$DOTFILES/nvim" ~/.config/nvim
+
+# Tmux
+mkdir -p ~/.config/tmux
+ln -sf "$DOTFILES/tmux/tmux.conf" ~/.tmux.conf
+ln -sfn "$DOTFILES/tmux/themes" ~/.config/tmux/themes
+
+# Install TPM (Tmux Plugin Manager)
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    print_step "Installing TPM (Tmux Plugin Manager)..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true
+    print_success "TPM installed"
+fi
 
 # Claude Code
 ln -sf "$DOTFILES/claude-code/settings.json" ~/.claude/settings.json
@@ -165,4 +182,11 @@ echo "  • <leader>fg - Live grep"
 echo "  • <leader>e  - File explorer"
 echo "  • <leader>gg - LazyGit"
 echo "  • Run 'nvim' to start (plugins install on first launch)"
+echo ""
+echo "Phase 3 - Tmux Features:"
+echo "  • C-a     - Prefix key (instead of C-b)"
+echo "  • C-a |   - Split vertical"
+echo "  • C-a -   - Split horizontal"
+echo "  • C-a hjkl - Navigate panes"
+echo "  • Run 'tmux' then 'C-a I' to install plugins"
 echo ""
