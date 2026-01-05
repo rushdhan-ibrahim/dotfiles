@@ -37,14 +37,14 @@ python = "3.12"
 # Automatically install missing tools when entering a directory
 auto_install = true
 
-# Check for new versions less frequently (in hours)
-fetch_remote_versions_timeout = "24h"
+# Cache remote versions for this duration
+cache_prune_age = "30d"
 
 # Always keep this many versions of each tool
 # keep = 1
 
 # Use .tool-versions files (asdf compatibility)
-asdf_compat = true
+idiomatic_version_file = true
 
 # Disable automatic activation message
 quiet = false

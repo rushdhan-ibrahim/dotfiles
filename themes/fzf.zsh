@@ -73,7 +73,11 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Preview window for fzf-tab
-zstyle ':fzf-tab:*' fzf-flags --color=fg:#e8dfd6,bg:#1a1816,hl:#d4a27f --color=fg+:#e8dfd6,bg+:#2a2725,hl+:#d4a27f --color=info:#a292a3,prompt:#d4a27f,pointer:#8ea4a2 --color=marker:#8a9a7b,spinner:#8ea4a2,header:#d4a27f
+zstyle ':fzf-tab:*' fzf-flags \
+    '--color=fg:#e8dfd6,bg:#1a1816,hl:#d4a27f' \
+    '--color=fg+:#e8dfd6,bg+:#2a2725,hl+:#d4a27f' \
+    '--color=info:#a292a3,prompt:#d4a27f,pointer:#8ea4a2' \
+    '--color=marker:#8a9a7b,spinner:#8ea4a2,header:#d4a27f'
 
 # Preview directory/file contents
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons -1 $realpath 2>/dev/null || ls -1 $realpath'
