@@ -1,0 +1,280 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Alacritty Configuration
+#                         Claude-themed GPU-accelerated terminal
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              General
+# ══════════════════════════════════════════════════════════════════════════════
+
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Window
+# ══════════════════════════════════════════════════════════════════════════════
+
+[window]
+padding = { x = 12, y = 12 }
+decorations = "Buttonless"
+opacity = 0.97
+blur = true
+dynamic_padding = true
+startup_mode = "Windowed"
+title = "Alacritty"
+dynamic_title = true
+
+[window.dimensions]
+columns = 120
+lines = 36
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Scrolling
+# ══════════════════════════════════════════════════════════════════════════════
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Font
+# ══════════════════════════════════════════════════════════════════════════════
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.offset]
+x = 0
+y = 1
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Colors (Claude Theme)
+# ══════════════════════════════════════════════════════════════════════════════
+
+[colors.primary]
+background = "#1a1816"
+foreground = "#e8dfd6"
+dim_foreground = "#c4bab0"
+bright_foreground = "#f0e8e0"
+
+[colors.cursor]
+cursor = "#d4a27f"
+text = "#1a1816"
+
+[colors.vi_mode_cursor]
+cursor = "#d4a27f"
+text = "#1a1816"
+
+[colors.selection]
+background = "#3a3735"
+text = "#e8dfd6"
+
+[colors.search.matches]
+background = "#c4b28a"
+foreground = "#1a1816"
+
+[colors.search.focused_match]
+background = "#d4a27f"
+foreground = "#1a1816"
+
+[colors.hints.start]
+background = "#c4b28a"
+foreground = "#1a1816"
+
+[colors.hints.end]
+background = "#2a2725"
+foreground = "#c4b28a"
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+background = "#2a2725"
+foreground = "#e8dfd6"
+
+# Normal colors
+[colors.normal]
+black   = "#2a2725"
+red     = "#c4746e"
+green   = "#8a9a7b"
+yellow  = "#c4b28a"
+blue    = "#8ea4a2"
+magenta = "#a292a3"
+cyan    = "#8ea4a2"
+white   = "#e8dfd6"
+
+# Bright colors
+[colors.bright]
+black   = "#625e5a"
+red     = "#d4847e"
+green   = "#9aaa8b"
+yellow  = "#d4c29a"
+blue    = "#9eb4b2"
+magenta = "#b2a2b3"
+cyan    = "#9eb4b2"
+white   = "#f0e8e0"
+
+# Dim colors
+[colors.dim]
+black   = "#1a1816"
+red     = "#a4645e"
+green   = "#6a7a5b"
+yellow  = "#a4926a"
+blue    = "#6e8482"
+magenta = "#827283"
+cyan    = "#6e8482"
+white   = "#c4bab0"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Bell
+# ══════════════════════════════════════════════════════════════════════════════
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Cursor
+# ══════════════════════════════════════════════════════════════════════════════
+
+[cursor]
+blink_interval = 500
+blink_timeout = 0
+unfocused_hollow = true
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
+
+[cursor.vi_mode_style]
+shape = "Block"
+blinking = "Off"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Mouse
+# ══════════════════════════════════════════════════════════════════════════════
+
+[mouse]
+hide_when_typing = true
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Keyboard
+# ══════════════════════════════════════════════════════════════════════════════
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Command"
+action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Command|Shift"
+action = "ToggleFullscreen"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Command"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Command"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "H"
+mods = "Command"
+action = "Hide"
+
+[[keyboard.bindings]]
+key = "Q"
+mods = "Command"
+action = "Quit"
+
+[[keyboard.bindings]]
+key = "W"
+mods = "Command"
+action = "Quit"
+
+[[keyboard.bindings]]
+key = "Plus"
+mods = "Command"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Command"
+action = "DecreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Command"
+action = "ResetFontSize"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Command"
+action = "ClearHistory"
+
+# Vi mode bindings
+[[keyboard.bindings]]
+key = "Space"
+mods = "Shift|Control"
+mode = "~Search"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "Escape"
+mode = "Vi|~Search"
+action = "ClearSelection"
+
+[[keyboard.bindings]]
+key = "I"
+mode = "Vi|~Search"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "Y"
+mode = "Vi|~Search"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "V"
+mode = "Vi|~Search"
+action = "ToggleBlockSelection"
+
+# Search mode
+[[keyboard.bindings]]
+key = "Slash"
+mode = "Vi|~Search"
+action = "SearchForward"
+
+[[keyboard.bindings]]
+key = "N"
+mode = "Vi|~Search"
+action = "SearchNext"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Shift"
+mode = "Vi|~Search"
+action = "SearchPrevious"

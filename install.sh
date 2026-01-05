@@ -52,6 +52,11 @@ brew install neovim 2>/dev/null || true
 # Phase 3: Tmux
 brew install tmux 2>/dev/null || true
 
+# Phase 4: Terminal emulators (uncomment desired ones)
+# brew install --cask alacritty 2>/dev/null || true
+# brew install --cask kitty 2>/dev/null || true
+# brew install --cask wezterm 2>/dev/null || true
+
 # Optional enhancements
 brew install git-delta lazygit btop dust duf 2>/dev/null || true
 
@@ -107,6 +112,10 @@ backup_dir_if_exists() {
 backup_dir_if_exists ~/.config/nvim
 backup_dir_if_exists ~/.config/tmux
 backup_if_exists ~/.tmux.conf
+backup_dir_if_exists ~/.config/alacritty
+backup_dir_if_exists ~/.config/kitty
+backup_dir_if_exists ~/.config/wezterm
+backup_if_exists ~/.wezterm.lua
 print_success "Backups complete"
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -140,6 +149,12 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true
     print_success "TPM installed"
 fi
+
+# Terminal emulators (Phase 4)
+ln -sfn "$DOTFILES/alacritty" ~/.config/alacritty
+ln -sfn "$DOTFILES/kitty" ~/.config/kitty
+ln -sfn "$DOTFILES/wezterm" ~/.config/wezterm
+ln -sf "$DOTFILES/wezterm/wezterm.lua" ~/.wezterm.lua
 
 # Claude Code
 ln -sf "$DOTFILES/claude-code/settings.json" ~/.claude/settings.json
@@ -189,4 +204,11 @@ echo "  • C-a |   - Split vertical"
 echo "  • C-a -   - Split horizontal"
 echo "  • C-a hjkl - Navigate panes"
 echo "  • Run 'tmux' then 'C-a I' to install plugins"
+echo ""
+echo "Phase 4 - Terminal Emulators:"
+echo "  Claude-themed configs available for:"
+echo "  • Alacritty: GPU-accelerated, minimal"
+echo "  • Kitty:     Feature-rich, GPU-rendered"
+echo "  • WezTerm:   Lua-configurable, cross-platform"
+echo "  To install: brew install --cask alacritty/kitty/wezterm"
 echo ""
