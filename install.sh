@@ -46,6 +46,9 @@ brew install starship eza bat neofetch 2>/dev/null || true
 # Phase 1: Shell superpowers
 brew install fzf fd ripgrep zoxide 2>/dev/null || true
 
+# Phase 2: Neovim
+brew install neovim 2>/dev/null || true
+
 # Optional enhancements
 brew install git-delta lazygit btop dust duf 2>/dev/null || true
 
@@ -91,6 +94,14 @@ backup_if_exists ~/.zshrc
 backup_if_exists ~/.zshenv
 backup_if_exists ~/.zprofile
 backup_if_exists ~/.config/starship.toml
+
+backup_dir_if_exists() {
+    if [[ -d "$1" ]] && [[ ! -L "$1" ]]; then
+        mv "$1" "$1.backup.$(date +%Y%m%d)"
+        echo "  Backed up: $1"
+    fi
+}
+backup_dir_if_exists ~/.config/nvim
 print_success "Backups complete"
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -109,6 +120,9 @@ ln -sf "$DOTFILES/starship/starship.toml" ~/.config/starship.toml
 
 # Neofetch
 ln -sfn "$DOTFILES/neofetch" ~/.config/neofetch
+
+# Neovim
+ln -sfn "$DOTFILES/nvim" ~/.config/nvim
 
 # Claude Code
 ln -sf "$DOTFILES/claude-code/settings.json" ~/.claude/settings.json
@@ -138,10 +152,17 @@ echo "   Select: JetBrainsMono Nerd Font (14pt)"
 echo ""
 echo -e "${SAND}3.${RESET} Restart your terminal or run: source ~/.zshrc"
 echo ""
-echo "New features in Phase 1:"
+echo "Phase 1 - Shell Features:"
 echo "  • Ctrl+R  - Fuzzy history search"
 echo "  • Ctrl+T  - Fuzzy file finder"
 echo "  • Alt+C   - Fuzzy cd to directory"
 echo "  • z <dir> - Smart directory jumping (zoxide)"
-echo "  • zi      - Interactive directory selection"
+echo ""
+echo "Phase 2 - Neovim Features:"
+echo "  • Space   - Leader key"
+echo "  • <leader>ff - Find files"
+echo "  • <leader>fg - Live grep"
+echo "  • <leader>e  - File explorer"
+echo "  • <leader>gg - LazyGit"
+echo "  • Run 'nvim' to start (plugins install on first launch)"
 echo ""
