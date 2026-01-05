@@ -76,35 +76,35 @@ zinit light zsh-users/zsh-completions
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Load completions after prompt
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$ZSH_LIB/completions.zsh"
 
 # Load aliases
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$ZSH_LIB/aliases.zsh"
 
 # Load functions
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$ZSH_LIB/functions.zsh"
 
 # Load FZF config (base)
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$ZSH_LIB/fzf.zsh"
 
 # Load Claude FZF theme (Phase 7)
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$DOTFILES/themes/fzf.zsh"
 
 # Load Claude completion styling (Phase 7)
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$DOTFILES/themes/completion.zsh"
 
 # Load zoxide
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$ZSH_LIB/zoxide.zsh"
 
 # Load shell tools (atuin, direnv, mise)
-zinit ice wait'0' lucid
+zinit ice wait'0' lucid silent
 zinit snippet "$ZSH_LIB/tools.zsh"
 
 # ══════════════════════════════════════════════════════════════════════════════

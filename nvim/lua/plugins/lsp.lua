@@ -47,7 +47,7 @@ return {
         pyright = {},
         ts_ls = {},
         rust_analyzer = {},
-        gopls = {},
+        -- gopls = {},  -- Requires Go to be installed
         jsonls = {},
         yamlls = {},
         bashls = {},
