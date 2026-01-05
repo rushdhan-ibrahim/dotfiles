@@ -56,16 +56,16 @@ verbose = false
 # plugin_repository = "https://github.com/mise-plugins/registry"
 
 # ══════════════════════════════════════════════════════════════════════════════
-#                              Aliases
+#                              Tool Aliases
 # ══════════════════════════════════════════════════════════════════════════════
 
-[alias.node]
+[tool_alias.node.versions]
 # Common Node.js version aliases
 lts-iron = "20"
 lts-hydrogen = "18"
 current = "22"
 
-[alias.python]
+[tool_alias.python.versions]
 # Common Python version aliases
 stable = "3.12"
 legacy = "3.9"
