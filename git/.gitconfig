@@ -1,0 +1,375 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Git Configuration
+#                         Claude-themed git workflow
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              User (customize these)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# [user]
+#     name = Your Name
+#     email = you@example.com
+#     signingkey = YOUR_GPG_KEY
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Core Settings
+# ══════════════════════════════════════════════════════════════════════════════
+
+[core]
+    editor = nvim
+    pager = delta
+    autocrlf = input
+    excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    trustctime = false
+    precomposeunicode = false
+    untrackedCache = true
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Init & Branch
+# ══════════════════════════════════════════════════════════════════════════════
+
+[init]
+    defaultBranch = main
+
+[branch]
+    autosetuprebase = always
+    sort = -committerdate
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Push & Pull & Fetch
+# ══════════════════════════════════════════════════════════════════════════════
+
+[push]
+    autoSetupRemote = true
+    default = current
+    followTags = true
+
+[pull]
+    rebase = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Merge & Rebase & Diff
+# ══════════════════════════════════════════════════════════════════════════════
+
+[merge]
+    conflictstyle = zdiff3
+    tool = nvim
+
+[mergetool]
+    keepBackup = false
+    prompt = false
+
+[mergetool "nvim"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c 'wincmd J'
+
+[rebase]
+    autosquash = true
+    autostash = true
+    updateRefs = true
+
+[diff]
+    colorMoved = default
+    algorithm = histogram
+    tool = nvim
+
+[difftool]
+    prompt = false
+
+[difftool "nvim"]
+    cmd = nvim -d $LOCAL $REMOTE
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Delta (Beautiful Diffs)
+# ══════════════════════════════════════════════════════════════════════════════
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    hyperlinks = true
+
+    # Claude theme colors
+    dark = true
+    syntax-theme = base16
+
+    # File header
+    file-style = "#d4a27f" bold
+    file-decoration-style = "#625e5a" ol
+    file-added-label = [+]
+    file-removed-label = [-]
+    file-modified-label = [~]
+    file-renamed-label = [>]
+
+    # Hunk header
+    hunk-header-style = "#c4b28a" italic
+    hunk-header-decoration-style = "#625e5a" box
+    hunk-header-file-style = "#d4a27f"
+    hunk-header-line-number-style = "#c4b28a"
+
+    # Line numbers
+    line-numbers-left-style = "#625e5a"
+    line-numbers-right-style = "#625e5a"
+    line-numbers-minus-style = "#c4746e"
+    line-numbers-plus-style = "#8a9a7b"
+    line-numbers-zero-style = "#625e5a"
+
+    # Diff colors
+    minus-style = syntax "#2d2020"
+    minus-emph-style = syntax "#4d2020"
+    plus-style = syntax "#202d20"
+    plus-emph-style = syntax "#204d20"
+
+    # Moved lines
+    map-styles = bold purple => syntax "#2a2535", bold cyan => syntax "#203535"
+
+    # Blame
+    blame-palette = "#1a1816" "#2a2725" "#3a3735"
+    blame-format = "{author:<18} {commit:<8} {timestamp:<15}"
+
+    # Merge conflicts
+    merge-conflict-begin-symbol = ─┐
+    merge-conflict-end-symbol = ─┘
+    merge-conflict-ours-diff-header-style = "#d4a27f" bold
+    merge-conflict-theirs-diff-header-style = "#8ea4a2" bold
+
+[interactive]
+    diffFilter = delta --color-only
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Colors
+# ══════════════════════════════════════════════════════════════════════════════
+
+[color]
+    ui = true
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = "#d4a27f" bold
+    local = "#e8dfd6"
+    remote = "#8a9a7b"
+    upstream = "#8ea4a2"
+    plain = "#625e5a"
+
+[color "status"]
+    added = "#8a9a7b"
+    changed = "#c4b28a"
+    untracked = "#a292a3"
+    deleted = "#c4746e"
+    branch = "#d4a27f" bold
+    nobranch = "#c4746e" bold
+
+[color "diff"]
+    meta = "#c4b28a"
+    frag = "#a292a3" bold
+    old = "#c4746e"
+    new = "#8a9a7b"
+    whitespace = "#c4746e" reverse
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Aliases
+# ══════════════════════════════════════════════════════════════════════════════
+
+[alias]
+    # ─────────────────────────────────────────────────────────────────────────
+    # Status & Info
+    # ─────────────────────────────────────────────────────────────────────────
+    s = status -sb
+    st = status
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Commits
+    # ─────────────────────────────────────────────────────────────────────────
+    c = commit
+    cm = commit -m
+    ca = commit --amend
+    can = commit --amend --no-edit
+    cane = commit --amend --no-edit --allow-empty
+    wip = commit -m "WIP: work in progress"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Branches
+    # ─────────────────────────────────────────────────────────────────────────
+    b = branch
+    ba = branch -a
+    bd = branch -d
+    bdd = branch -D
+    bm = branch -m
+
+    # Switch (modern checkout)
+    sw = switch
+    swc = switch -c
+    swd = switch -d
+
+    # Checkout (legacy)
+    co = checkout
+    cob = checkout -b
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Staging
+    # ─────────────────────────────────────────────────────────────────────────
+    a = add
+    aa = add --all
+    ap = add --patch
+    au = add --update
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Logging
+    # ─────────────────────────────────────────────────────────────────────────
+    l = log --oneline -20
+    lg = log --graph --oneline --decorate -20
+    lga = log --graph --oneline --decorate --all
+    ll = log --graph --pretty=format:'%C(#d4a27f)%h%Creset -%C(#c4b28a)%d%Creset %s %C(#625e5a)(%cr)%Creset %C(#8ea4a2)<%an>%Creset'
+    lla = log --graph --pretty=format:'%C(#d4a27f)%h%Creset -%C(#c4b28a)%d%Creset %s %C(#625e5a)(%cr)%Creset %C(#8ea4a2)<%an>%Creset' --all
+    last = log -1 HEAD --stat
+    hist = log --pretty=format:'%C(#d4a27f)%h%Creset %C(#625e5a)%ad%Creset | %s%C(#c4b28a)%d%Creset %C(#8ea4a2)[%an]%Creset' --date=short
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Diff
+    # ─────────────────────────────────────────────────────────────────────────
+    d = diff
+    ds = diff --staged
+    dc = diff --cached
+    dw = diff --word-diff
+    dt = difftool
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Stash
+    # ─────────────────────────────────────────────────────────────────────────
+    ss = stash
+    sp = stash pop
+    sl = stash list
+    sa = stash apply
+    sd = stash drop
+    sshow = stash show -p
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Remote
+    # ─────────────────────────────────────────────────────────────────────────
+    f = fetch
+    fa = fetch --all
+    pl = pull
+    ps = push
+    psf = push --force-with-lease
+    psu = push -u origin HEAD
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Rebase
+    # ─────────────────────────────────────────────────────────────────────────
+    rb = rebase
+    rba = rebase --abort
+    rbc = rebase --continue
+    rbs = rebase --skip
+    rbi = rebase -i
+    rbm = rebase main
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Reset & Undo
+    # ─────────────────────────────────────────────────────────────────────────
+    undo = reset --soft HEAD~1
+    unstage = reset HEAD --
+    discard = checkout --
+    nuke = !git reset --hard HEAD && git clean -fd
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Cherry-pick
+    # ─────────────────────────────────────────────────────────────────────────
+    cp = cherry-pick
+    cpa = cherry-pick --abort
+    cpc = cherry-pick --continue
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Tags
+    # ─────────────────────────────────────────────────────────────────────────
+    t = tag
+    tl = tag -l
+    td = tag -d
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Utilities
+    # ─────────────────────────────────────────────────────────────────────────
+    aliases = config --get-regexp alias
+    contributors = shortlog -sn --no-merges
+    today = log --since=midnight --oneline --author="$(git config user.email)"
+    week = log --since='1 week ago' --oneline --author="$(git config user.email)"
+
+    # Find commits
+    find = log --pretty=format:'%C(#d4a27f)%h%Creset %s' --all --grep
+
+    # Who touched this file
+    who = log --follow -p --
+
+    # List branches by recent activity
+    recent = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)' refs/heads/
+
+    # Clean up merged branches
+    cleanup = "!git branch --merged | grep -v '\\*\\|main\\|master\\|develop' | xargs -n 1 git branch -d"
+
+    # Show root directory
+    root = rev-parse --show-toplevel
+
+    # Quick fixup
+    fixup = commit --fixup
+
+    # Assume unchanged (for local config files)
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+
+    # Interactive staging with fzf
+    fza = "!git ls-files -m -o --exclude-standard | fzf -m --preview 'git diff --color=always {}' | xargs git add"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              URL Shortcuts
+# ══════════════════════════════════════════════════════════════════════════════
+
+[url "git@github.com:"]
+    insteadOf = gh:
+    pushInsteadOf = gh:
+
+[url "git@gitlab.com:"]
+    insteadOf = gl:
+    pushInsteadOf = gl:
+
+[url "git@bitbucket.org:"]
+    insteadOf = bb:
+    pushInsteadOf = bb:
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Misc Settings
+# ══════════════════════════════════════════════════════════════════════════════
+
+[help]
+    autocorrect = prompt
+
+[rerere]
+    enabled = true
+
+[column]
+    ui = auto
+
+[log]
+    abbrevCommit = true
+    decorate = short
+
+[status]
+    showUntrackedFiles = all
+    submoduleSummary = true
+
+[transfer]
+    fsckobjects = true
+
+[receive]
+    fsckObjects = true
+
+[credential]
+    helper = osxkeychain

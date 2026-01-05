@@ -1,0 +1,236 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Global Git Ignore
+#                         System and editor files to ignore everywhere
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              macOS
+# ══════════════════════════════════════════════════════════════════════════════
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Windows
+# ══════════════════════════════════════════════════════════════════════════════
+
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Linux
+# ══════════════════════════════════════════════════════════════════════════════
+
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Editors & IDEs
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Vim
+*.swp
+*.swo
+*.swn
+*~
+.netrwhist
+Session.vim
+.vim/
+tags
+
+# Neovim
+.nvim/
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# TextMate
+*.tmproj
+*.tmproject
+tmtags
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Build & Dependencies
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn/
+.pnpm-store/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+env/
+.env.local
+.env.*.local
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+.bundle/
+vendor/bundle
+
+# Go
+/vendor/
+/Godeps/
+
+# Rust
+/target/
+Cargo.lock
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Logs & Databases
+# ══════════════════════════════════════════════════════════════════════════════
+
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Secrets & Credentials
+# ══════════════════════════════════════════════════════════════════════════════
+
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+.secrets
+secrets/
+credentials/
+*.credentials
+.netrc
+.npmrc
+.pypirc
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Misc
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Coverage
+coverage/
+.coverage
+htmlcov/
+.nyc_output/
+lcov.info
+
+# Cache
+.cache/
+*.cache
+.parcel-cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Local configuration
+*.local
+.local/

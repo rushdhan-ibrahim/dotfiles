@@ -116,6 +116,9 @@ backup_dir_if_exists ~/.config/alacritty
 backup_dir_if_exists ~/.config/kitty
 backup_dir_if_exists ~/.config/wezterm
 backup_if_exists ~/.wezterm.lua
+backup_if_exists ~/.gitconfig
+backup_if_exists ~/.gitignore_global
+backup_dir_if_exists ~/.config/lazygit
 print_success "Backups complete"
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -155,6 +158,12 @@ ln -sfn "$DOTFILES/alacritty" ~/.config/alacritty
 ln -sfn "$DOTFILES/kitty" ~/.config/kitty
 ln -sfn "$DOTFILES/wezterm" ~/.config/wezterm
 ln -sf "$DOTFILES/wezterm/wezterm.lua" ~/.wezterm.lua
+
+# Git (Phase 5)
+ln -sf "$DOTFILES/git/.gitconfig" ~/.gitconfig
+ln -sf "$DOTFILES/git/.gitignore_global" ~/.gitignore_global
+mkdir -p ~/.config/lazygit
+ln -sf "$DOTFILES/lazygit/config.yml" ~/.config/lazygit/config.yml
 
 # Claude Code
 ln -sf "$DOTFILES/claude-code/settings.json" ~/.claude/settings.json
@@ -211,4 +220,10 @@ echo "  • Alacritty: GPU-accelerated, minimal"
 echo "  • Kitty:     Feature-rich, GPU-rendered"
 echo "  • WezTerm:   Lua-configurable, cross-platform"
 echo "  To install: brew install --cask alacritty/kitty/wezterm"
+echo ""
+echo "Phase 5 - Git Workflow:"
+echo "  • Delta:   Beautiful diffs with Claude theme"
+echo "  • Lazygit: Git TUI (run 'lg' or 'lazygit')"
+echo "  • Aliases: gs, gc, gp, gl, gd, and 50+ more"
+echo "  • Run 'git aliases' to see all available"
 echo ""
