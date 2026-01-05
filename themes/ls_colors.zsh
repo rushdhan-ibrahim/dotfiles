@@ -23,31 +23,31 @@
 # ══════════════════════════════════════════════════════════════════════════════
 # Using 24-bit true color format: 38;2;R;G;B
 
-# Core colors
-local sand="38;2;196;178;138"          # #c4b28a - Directories
-local sage="38;2;138;154;123"          # #8a9a7b - Executables
-local teal="38;2;142;164;162"          # #8ea4a2 - Symlinks
-local terracotta="38;2;196;116;110"    # #c4746e - Archives
-local dusty_rose="38;2;162;146;163"    # #a292a3 - Media
-local coral="38;2;212;162;127"         # #d4a27f - Documents
-local warm_gray="38;2;98;94;90"        # #625e5a - Config
-local dim="38;2;74;71;69"              # #4a4745 - Build artifacts
-local fg="38;2;232;223;214"            # #e8dfd6 - Default
+# Core colors (using typeset for script-local scope)
+typeset sand="38;2;196;178;138"          # #c4b28a - Directories
+typeset sage="38;2;138;154;123"          # #8a9a7b - Executables
+typeset teal="38;2;142;164;162"          # #8ea4a2 - Symlinks
+typeset terracotta="38;2;196;116;110"    # #c4746e - Archives
+typeset dusty_rose="38;2;162;146;163"    # #a292a3 - Media
+typeset coral="38;2;212;162;127"         # #d4a27f - Documents
+typeset warm_gray="38;2;98;94;90"        # #625e5a - Config
+typeset dim="38;2;74;71;69"              # #4a4745 - Build artifacts
+typeset fg_color="38;2;232;223;214"      # #e8dfd6 - Default
 
 # Language-specific accents
-local js_color="38;2;212;162;127"      # Coral - JavaScript/TypeScript
-local py_color="38;2;138;154;123"      # Sage - Python
-local rs_color="38;2;196;116;110"      # Terracotta - Rust
-local go_color="38;2;142;164;162"      # Teal - Go
-local rb_color="38;2;162;146;163"      # Dusty Rose - Ruby
-local lua_color="38;2;196;178;138"     # Sand - Lua/Shell
-local java_color="38;2;212;162;127"    # Coral - Java
-local c_color="38;2;142;164;162"       # Teal - C/C++
+typeset js_color="38;2;212;162;127"      # Coral - JavaScript/TypeScript
+typeset py_color="38;2;138;154;123"      # Sage - Python
+typeset rs_color="38;2;196;116;110"      # Terracotta - Rust
+typeset go_color="38;2;142;164;162"      # Teal - Go
+typeset rb_color="38;2;162;146;163"      # Dusty Rose - Ruby
+typeset lua_color="38;2;196;178;138"     # Sand - Lua/Shell
+typeset java_color="38;2;212;162;127"    # Coral - Java
+typeset c_color="38;2;142;164;162"       # Teal - C/C++
 
 # Style modifiers
-local bold="1"
-local italic="3"
-local underline="4"
+typeset bold="1"
+typeset italic="3"
+typeset underline="4"
 
 # ══════════════════════════════════════════════════════════════════════════════
 #                              LS_COLORS DEFINITION
@@ -471,7 +471,7 @@ LS_COLORS+="*~=${dim}:"
 # ─────────────────────────────────────────────────────────────────────────────
 # Use terracotta (warning) with dim style for caution
 
-local secret="${terracotta};${italic}"
+typeset secret="${terracotta};${italic}"
 
 LS_COLORS+="*.env=${secret}:"
 LS_COLORS+="*.env.local=${secret}:"
@@ -535,7 +535,7 @@ EZA_COLORS+="un=${warm_gray}:"            # User (not you)
 EZA_COLORS+="gu=${sage}:"                 # Group (yours)
 EZA_COLORS+="gn=${warm_gray}:"            # Group (not yours)
 EZA_COLORS+="da=${warm_gray}:"            # Date
-EZA_COLORS+="sn=${fg}:"                   # Size number
+EZA_COLORS+="sn=${fg_color}:"             # Size number
 EZA_COLORS+="sb=${warm_gray}:"            # Size unit
 EZA_COLORS+="ur=${sage}:"                 # User read
 EZA_COLORS+="uw=${coral}:"                # User write
