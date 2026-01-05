@@ -1,0 +1,45 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Bat Configuration
+#                         Claude-themed Syntax Highlighting
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Bat is a cat(1) clone with syntax highlighting and Git integration.
+# This config applies the Claude theme for beautiful code viewing.
+#
+# Theme installation:
+#   1. Create themes directory: mkdir -p ~/.config/bat/themes
+#   2. Copy Claude.tmTheme to ~/.config/bat/themes/
+#   3. Rebuild cache: bat cache --build
+#   4. Verify: bat --list-themes | grep Claude
+
+# Use the Claude theme
+--theme="Claude"
+
+# Show line numbers
+--style="numbers,changes,header,grid"
+
+# Use italic for comments (if terminal supports)
+--italic-text=always
+
+# Wrap lines at terminal width
+--wrap=auto
+
+# Set tab width
+--tabs=4
+
+# Paging behavior
+--paging=auto
+
+# Map file extensions to languages
+--map-syntax "*.conf:INI"
+--map-syntax "*.config:INI"
+--map-syntax ".gitignore:Git Ignore"
+--map-syntax ".env*:Bourne Again Shell (bash)"
+--map-syntax "*.toml:TOML"
+--map-syntax "Dockerfile*:Dockerfile"
+--map-syntax "docker-compose*.yml:YAML"
+--map-syntax "*.mdx:Markdown"
+--map-syntax ".zshrc:Bourne Again Shell (bash)"
+--map-syntax ".bashrc:Bourne Again Shell (bash)"
+--map-syntax ".zshenv:Bourne Again Shell (bash)"
+--map-syntax ".zprofile:Bourne Again Shell (bash)"

@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  ══════════════════════════════════════════════════════════════════════════════
+                              Claude Theme for Bat/Delta
+                         Hand-crafted Syntax Highlighting
+  ══════════════════════════════════════════════════════════════════════════════
+
+  Philosophy of Syntax:
+    Comments      → Warm Gray #625e5a, italic (whispers)
+    Keywords      → Dusty Rose #a292a3 (structure, control)
+    Strings       → Sage #8a9a7b (data, content)
+    Numbers       → Peach #e8b89d (concrete values)
+    Functions     → Teal #8ea4a2 (actions, verbs)
+    Types/Classes → Sand #c4b28a (nouns, structures)
+    Variables     → Foreground #e8dfd6 (the story)
+    Operators     → Coral #d4a27f (connections)
+    Constants     → Terracotta #c4746e (immutable truth)
+    Errors        → Terracotta bold (attention!)
+-->
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>Claude</string>
+    <key>author</key>
+    <string>Claude Code</string>
+    <key>settings</key>
+    <array>
+        <!-- Global Settings -->
+        <dict>
+            <key>settings</key>
+            <dict>
+                <key>background</key>
+                <string>#1a1816</string>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+                <key>caret</key>
+                <string>#e8dfd6</string>
+                <key>invisibles</key>
+                <string>#4a4745</string>
+                <key>lineHighlight</key>
+                <string>#2a2725</string>
+                <key>selection</key>
+                <string>#3a3735</string>
+                <key>selectionBorder</key>
+                <string>#4a4745</string>
+                <key>findHighlight</key>
+                <string>#d4a27f</string>
+                <key>findHighlightForeground</key>
+                <string>#1a1816</string>
+                <key>activeGuide</key>
+                <string>#625e5a</string>
+                <key>bracketsForeground</key>
+                <string>#d4a27f</string>
+                <key>bracketsOptions</key>
+                <string>underline</string>
+                <key>bracketContentsForeground</key>
+                <string>#e8dfd6</string>
+                <key>bracketContentsOptions</key>
+                <string>underline</string>
+                <key>tagsOptions</key>
+                <string>stippled_underline</string>
+            </dict>
+        </dict>
+
+        <!-- Comments: Warm Gray, italic -->
+        <dict>
+            <key>name</key>
+            <string>Comment</string>
+            <key>scope</key>
+            <string>comment, punctuation.definition.comment</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#625e5a</string>
+                <key>fontStyle</key>
+                <string>italic</string>
+            </dict>
+        </dict>
+
+        <!-- Keywords: Dusty Rose -->
+        <dict>
+            <key>name</key>
+            <string>Keyword</string>
+            <key>scope</key>
+            <string>keyword, storage.type, storage.modifier</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#a292a3</string>
+            </dict>
+        </dict>
+
+        <!-- Control Keywords: Dusty Rose, bold -->
+        <dict>
+            <key>name</key>
+            <string>Control Keyword</string>
+            <key>scope</key>
+            <string>keyword.control</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#a292a3</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Strings: Sage -->
+        <dict>
+            <key>name</key>
+            <string>String</string>
+            <key>scope</key>
+            <string>string, string.quoted</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8a9a7b</string>
+            </dict>
+        </dict>
+
+        <!-- String Interpolation -->
+        <dict>
+            <key>name</key>
+            <string>String Interpolation</string>
+            <key>scope</key>
+            <string>punctuation.section.embedded, variable.interpolation</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+            </dict>
+        </dict>
+
+        <!-- Numbers: Peach -->
+        <dict>
+            <key>name</key>
+            <string>Number</string>
+            <key>scope</key>
+            <string>constant.numeric</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8b89d</string>
+            </dict>
+        </dict>
+
+        <!-- Constants: Terracotta -->
+        <dict>
+            <key>name</key>
+            <string>Constant</string>
+            <key>scope</key>
+            <string>constant, constant.language, constant.character</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4746e</string>
+            </dict>
+        </dict>
+
+        <!-- Boolean: Terracotta -->
+        <dict>
+            <key>name</key>
+            <string>Boolean</string>
+            <key>scope</key>
+            <string>constant.language.boolean</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4746e</string>
+            </dict>
+        </dict>
+
+        <!-- Functions: Teal -->
+        <dict>
+            <key>name</key>
+            <string>Function</string>
+            <key>scope</key>
+            <string>entity.name.function, support.function, meta.function-call</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- Function Definition: Teal, bold -->
+        <dict>
+            <key>name</key>
+            <string>Function Definition</string>
+            <key>scope</key>
+            <string>entity.name.function.definition, meta.function entity.name.function</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Types/Classes: Sand -->
+        <dict>
+            <key>name</key>
+            <string>Type</string>
+            <key>scope</key>
+            <string>entity.name.type, entity.name.class, support.type, support.class</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4b28a</string>
+            </dict>
+        </dict>
+
+        <!-- Class Definition: Sand, bold -->
+        <dict>
+            <key>name</key>
+            <string>Class Definition</string>
+            <key>scope</key>
+            <string>entity.name.class.definition, meta.class entity.name.class</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4b28a</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Variables: Foreground -->
+        <dict>
+            <key>name</key>
+            <string>Variable</string>
+            <key>scope</key>
+            <string>variable, variable.other</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+            </dict>
+        </dict>
+
+        <!-- Variable Parameter -->
+        <dict>
+            <key>name</key>
+            <string>Variable Parameter</string>
+            <key>scope</key>
+            <string>variable.parameter</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+                <key>fontStyle</key>
+                <string>italic</string>
+            </dict>
+        </dict>
+
+        <!-- Operators: Coral -->
+        <dict>
+            <key>name</key>
+            <string>Operator</string>
+            <key>scope</key>
+            <string>keyword.operator</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+            </dict>
+        </dict>
+
+        <!-- Punctuation -->
+        <dict>
+            <key>name</key>
+            <string>Punctuation</string>
+            <key>scope</key>
+            <string>punctuation</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+            </dict>
+        </dict>
+
+        <!-- Brackets -->
+        <dict>
+            <key>name</key>
+            <string>Brackets</string>
+            <key>scope</key>
+            <string>punctuation.section, punctuation.bracket, punctuation.brace, punctuation.parenthesis</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+            </dict>
+        </dict>
+
+        <!-- Property -->
+        <dict>
+            <key>name</key>
+            <string>Property</string>
+            <key>scope</key>
+            <string>variable.other.property, support.variable.property, meta.property-name</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- Import/Export: Warm Gray -->
+        <dict>
+            <key>name</key>
+            <string>Import/Export</string>
+            <key>scope</key>
+            <string>keyword.control.import, keyword.control.export, keyword.control.from</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#625e5a</string>
+            </dict>
+        </dict>
+
+        <!-- Module Name -->
+        <dict>
+            <key>name</key>
+            <string>Module Name</string>
+            <key>scope</key>
+            <string>entity.name.module, support.module</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4b28a</string>
+            </dict>
+        </dict>
+
+        <!-- Decorators: Dusty Rose, italic -->
+        <dict>
+            <key>name</key>
+            <string>Decorator</string>
+            <key>scope</key>
+            <string>meta.decorator, entity.name.decorator</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#a292a3</string>
+                <key>fontStyle</key>
+                <string>italic</string>
+            </dict>
+        </dict>
+
+        <!-- Regex: Coral -->
+        <dict>
+            <key>name</key>
+            <string>Regular Expression</string>
+            <key>scope</key>
+            <string>string.regexp</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+            </dict>
+        </dict>
+
+        <!-- URLs: Teal, underline -->
+        <dict>
+            <key>name</key>
+            <string>URL</string>
+            <key>scope</key>
+            <string>string.other.link, markup.underline.link</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+                <key>fontStyle</key>
+                <string>underline</string>
+            </dict>
+        </dict>
+
+        <!-- Escape Characters -->
+        <dict>
+            <key>name</key>
+            <string>Escape Character</string>
+            <key>scope</key>
+            <string>constant.character.escape</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+            </dict>
+        </dict>
+
+        <!-- Tags (HTML/XML): Coral -->
+        <dict>
+            <key>name</key>
+            <string>Tag</string>
+            <key>scope</key>
+            <string>entity.name.tag</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+            </dict>
+        </dict>
+
+        <!-- Tag Attributes: Teal -->
+        <dict>
+            <key>name</key>
+            <string>Tag Attribute</string>
+            <key>scope</key>
+            <string>entity.other.attribute-name</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- CSS Property: Teal -->
+        <dict>
+            <key>name</key>
+            <string>CSS Property</string>
+            <key>scope</key>
+            <string>support.type.property-name.css</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- CSS Value: Foreground -->
+        <dict>
+            <key>name</key>
+            <string>CSS Value</string>
+            <key>scope</key>
+            <string>support.constant.property-value.css</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+            </dict>
+        </dict>
+
+        <!-- CSS Selector: Sand -->
+        <dict>
+            <key>name</key>
+            <string>CSS Selector</string>
+            <key>scope</key>
+            <string>entity.name.tag.css, entity.other.attribute-name.class.css, entity.other.attribute-name.id.css</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4b28a</string>
+            </dict>
+        </dict>
+
+        <!-- Markdown Heading: Coral, bold -->
+        <dict>
+            <key>name</key>
+            <string>Markdown Heading</string>
+            <key>scope</key>
+            <string>markup.heading, entity.name.section.markdown</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Markdown Bold: Foreground, bold -->
+        <dict>
+            <key>name</key>
+            <string>Markdown Bold</string>
+            <key>scope</key>
+            <string>markup.bold</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Markdown Italic: Foreground, italic -->
+        <dict>
+            <key>name</key>
+            <string>Markdown Italic</string>
+            <key>scope</key>
+            <string>markup.italic</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#e8dfd6</string>
+                <key>fontStyle</key>
+                <string>italic</string>
+            </dict>
+        </dict>
+
+        <!-- Markdown Code: Sage -->
+        <dict>
+            <key>name</key>
+            <string>Markdown Code</string>
+            <key>scope</key>
+            <string>markup.raw, markup.inline.raw</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8a9a7b</string>
+            </dict>
+        </dict>
+
+        <!-- Markdown List -->
+        <dict>
+            <key>name</key>
+            <string>Markdown List</string>
+            <key>scope</key>
+            <string>markup.list, punctuation.definition.list</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#a292a3</string>
+            </dict>
+        </dict>
+
+        <!-- Markdown Quote: Warm Gray, italic -->
+        <dict>
+            <key>name</key>
+            <string>Markdown Quote</string>
+            <key>scope</key>
+            <string>markup.quote</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#625e5a</string>
+                <key>fontStyle</key>
+                <string>italic</string>
+            </dict>
+        </dict>
+
+        <!-- TODO/FIXME: Sand, bold -->
+        <dict>
+            <key>name</key>
+            <string>TODO</string>
+            <key>scope</key>
+            <string>keyword.codetag, comment.line.todo, storage.type.class.todo</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4b28a</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Invalid/Error: Terracotta, bold -->
+        <dict>
+            <key>name</key>
+            <string>Invalid</string>
+            <key>scope</key>
+            <string>invalid, invalid.illegal</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4746e</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <!-- Deprecated: Terracotta, italic strikethrough -->
+        <dict>
+            <key>name</key>
+            <string>Deprecated</string>
+            <key>scope</key>
+            <string>invalid.deprecated</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4746e</string>
+                <key>fontStyle</key>
+                <string>italic</string>
+            </dict>
+        </dict>
+
+        <!-- JSON Key: Teal -->
+        <dict>
+            <key>name</key>
+            <string>JSON Key</string>
+            <key>scope</key>
+            <string>support.type.property-name.json, string.json meta.structure.dictionary.key.json</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- YAML Key: Teal -->
+        <dict>
+            <key>name</key>
+            <string>YAML Key</string>
+            <key>scope</key>
+            <string>entity.name.tag.yaml</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- Shell Variable: Coral -->
+        <dict>
+            <key>name</key>
+            <string>Shell Variable</string>
+            <key>scope</key>
+            <string>variable.other.normal.shell, variable.other.special.shell</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#d4a27f</string>
+            </dict>
+        </dict>
+
+        <!-- Shell Command: Teal -->
+        <dict>
+            <key>name</key>
+            <string>Shell Command</string>
+            <key>scope</key>
+            <string>support.function.builtin.shell</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8ea4a2</string>
+            </dict>
+        </dict>
+
+        <!-- Diff Added: Sage -->
+        <dict>
+            <key>name</key>
+            <string>Diff Added</string>
+            <key>scope</key>
+            <string>markup.inserted, meta.diff.header.to-file</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#8a9a7b</string>
+            </dict>
+        </dict>
+
+        <!-- Diff Deleted: Terracotta -->
+        <dict>
+            <key>name</key>
+            <string>Diff Deleted</string>
+            <key>scope</key>
+            <string>markup.deleted, meta.diff.header.from-file</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4746e</string>
+            </dict>
+        </dict>
+
+        <!-- Diff Changed: Sand -->
+        <dict>
+            <key>name</key>
+            <string>Diff Changed</string>
+            <key>scope</key>
+            <string>markup.changed</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#c4b28a</string>
+            </dict>
+        </dict>
+
+    </array>
+</dict>
+</plist>

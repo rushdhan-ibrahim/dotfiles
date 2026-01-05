@@ -186,7 +186,25 @@ ln -sf "$DOTFILES/claude-code/settings.json" ~/.claude/settings.json
 ln -sf "$DOTFILES/claude-code/statusline.sh" ~/.claude/statusline.sh
 chmod +x ~/.claude/statusline.sh
 
+# Phase 7: Visual System
+# Bat theme
+mkdir -p ~/.config/bat/themes
+ln -sf "$DOTFILES/bat/config" ~/.config/bat/config
+ln -sf "$DOTFILES/bat/themes/Claude.tmTheme" ~/.config/bat/themes/Claude.tmTheme
+
 print_success "Symlinks created"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              Build Caches
+# ══════════════════════════════════════════════════════════════════════════════
+
+print_step "Building theme caches..."
+
+# Build bat theme cache
+if command -v bat &>/dev/null; then
+    bat cache --build 2>/dev/null || true
+    print_success "Bat theme cache built"
+fi
 
 # ══════════════════════════════════════════════════════════════════════════════
 #                              Final Steps
@@ -248,4 +266,15 @@ echo "  • Atuin:  Shell history sync (Ctrl+R for fuzzy search)"
 echo "  • Direnv: Per-directory environments (.envrc)"
 echo "  • Mise:   Version manager (node, python, go)"
 echo "  • Run 'atuin register' to sync history across machines"
+echo ""
+echo "Phase 7 - The Visual Opus:"
+echo "  • Time-aware prompt colors (shifts throughout the day)"
+echo "  • 150+ file type colors with semantic meaning"
+echo "  • Claude face in prompt: ◠◡◠"
+echo "  • Poetic git status: ✦ staged,  modified, ⇡⇣ sync"
+echo "  • Beautiful syntax highlighting with bat"
+echo "  • Claude Code with teal accent (vs terminal coral)"
+echo ""
+echo -e "${CORAL}    ◠◡◠${RESET}"
+echo -e "${SAND}   Welcome to your Claude-themed terminal!${RESET}"
 echo ""

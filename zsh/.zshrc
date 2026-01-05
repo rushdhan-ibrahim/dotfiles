@@ -32,6 +32,16 @@ source "${ZINIT_HOME}/zinit.zsh"
 [[ -f "$ZSH_LIB/keybindings.zsh" ]] && source "$ZSH_LIB/keybindings.zsh"
 
 # ══════════════════════════════════════════════════════════════════════════════
+#                              Visual System (Phase 7)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Load the Claude visual system - colors, time-awareness, personality
+[[ -f "$ZSH_LIB/visual.zsh" ]] && source "$ZSH_LIB/visual.zsh"
+
+# Load file colors taxonomy (LS_COLORS, EZA_COLORS)
+[[ -f "$DOTFILES/themes/ls_colors.zsh" ]] && source "$DOTFILES/themes/ls_colors.zsh"
+
+# ══════════════════════════════════════════════════════════════════════════════
 #                              Prompt (Load Early)
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -77,9 +87,17 @@ zinit snippet "$ZSH_LIB/aliases.zsh"
 zinit ice wait'0' lucid
 zinit snippet "$ZSH_LIB/functions.zsh"
 
-# Load FZF config
+# Load FZF config (base)
 zinit ice wait'0' lucid
 zinit snippet "$ZSH_LIB/fzf.zsh"
+
+# Load Claude FZF theme (Phase 7)
+zinit ice wait'0' lucid
+zinit snippet "$DOTFILES/themes/fzf.zsh"
+
+# Load Claude completion styling (Phase 7)
+zinit ice wait'0' lucid
+zinit snippet "$DOTFILES/themes/completion.zsh"
 
 # Load zoxide
 zinit ice wait'0' lucid

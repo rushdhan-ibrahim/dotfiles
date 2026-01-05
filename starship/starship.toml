@@ -1,123 +1,512 @@
-# Claude/Anthropic themed terminal
-# Warm, muted, earthy tones
+# ══════════════════════════════════════════════════════════════════════════════
+#                              The Starship Masterpiece
+#                         Claude's Artistic Terminal Prompt
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Design:
+# ╭─ ◠◡◠ ────────────────────────────────────────────────────────────────╮
+# │                                                                        │
+# ╰─  ~/projects/dotfiles   main ✦ 3 ⇡2   node v20  14:32 ──────────╯
+#   ❯
+#
+# Philosophy:
+#   - The Claude presence (◠◡◠) watches gently from the top-left
+#   - Box-drawing characters create an elegant frame
+#   - Poetic git status tells a story, not cryptic symbols
+#   - Time and context flow naturally
+#   - Performance target: < 10ms render
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              FORMAT
+# ══════════════════════════════════════════════════════════════════════════════
 
 format = """
-$username\
-$hostname\
-$directory\
-$git_branch\
-$git_status\
-$git_metrics\
-$python\
-$nodejs\
-$rust\
-$golang\
-$java\
-$package\
-$cmd_duration\
-$line_break\
+[╭─](fg:#625e5a)[ ◠◡◠ ](fg:#d4a27f)[─](fg:#625e5a)$fill[─╮](fg:#625e5a)
+[│](fg:#625e5a)$all[│](fg:#625e5a)
+[╰─](fg:#625e5a)$directory$git_branch$git_status$python$nodejs$rust$golang$fill$cmd_duration$time[──╯](fg:#625e5a)
 $character"""
 
-# Make prompt span two lines with breathing room
+# Right format disabled - using fill instead for alignment
+right_format = ""
+
+# Add breathing room
 add_newline = true
 
-# Right side prompt
-right_format = """$time"""
+# ══════════════════════════════════════════════════════════════════════════════
+#                              FILL CHARACTER
+# ══════════════════════════════════════════════════════════════════════════════
+
+[fill]
+symbol = "─"
+style = "fg:#4a4745"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              THE PROMPT CHARACTER
+# ══════════════════════════════════════════════════════════════════════════════
 
 [character]
-success_symbol = "[❯](bold #d4a27f)"
-error_symbol = "[❯](bold #c4746e)"
-vimcmd_symbol = "[❮](bold #8a9a7b)"
+success_symbol = "[  ❯](bold fg:#d4a27f)"
+error_symbol = "[  ❯](bold fg:#c4746e)"
+vimcmd_symbol = "[  ❮](bold fg:#8a9a7b)"
+vimcmd_replace_one_symbol = "[  ❮](bold fg:#a292a3)"
+vimcmd_replace_symbol = "[  ❮](bold fg:#a292a3)"
+vimcmd_visual_symbol = "[  ❮](bold fg:#8ea4a2)"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              DIRECTORY
+# ══════════════════════════════════════════════════════════════════════════════
 
 [directory]
-style = "bold #c4b28a"
-format = "[$path]($style)[$read_only]($read_only_style) "
-truncation_length = 4
+format = " [$path]($style)[$read_only]($read_only_style) "
+style = "bold fg:#c4b28a"
+read_only = " 󰌾"
+read_only_style = "fg:#c4746e"
+truncation_length = 5
 truncate_to_repo = true
-read_only = " "
-read_only_style = "#c4746e"
+truncation_symbol = "…/"
+home_symbol = " "
+fish_style_pwd_dir_length = 0
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = " "
 "~" = " "
+"Documents" = " 󰈙"
+"Downloads" = " "
+"Music" = " 󰝚"
+"Pictures" = " "
+"Videos" = " 󰕧"
+"Developer" = " "
+"projects" = " "
+"src" = " "
+".config" = " "
+"dotfiles" = " "
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              GIT - THE POETRY
+# ══════════════════════════════════════════════════════════════════════════════
 
 [git_branch]
 symbol = " "
-style = "bold #d4a27f"
-format = "on [$symbol$branch(:$remote_branch)]($style) "
+style = "fg:#d4a27f"
+format = " [$symbol$branch(:$remote_branch)]($style)"
+truncation_length = 25
+truncation_symbol = "…"
 
 [git_status]
-style = "#a292a3"
-format = '([$all_status$ahead_behind]($style) )'
-conflicted = "="
-ahead = "⇡${count}"
-behind = "⇣${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-untracked = "?${count}"
-stashed = "$${count}"
-modified = "!${count}"
-staged = "+${count}"
-renamed = "»${count}"
-deleted = "✘${count}"
+format = "([ $all_status$ahead_behind]($style))"
+style = "fg:#a292a3"
+
+# Poetic status symbols
+conflicted = "[↯](bold fg:#c4746e)"
+ahead = "[⇡${count}](fg:#8a9a7b)"
+behind = "[⇣${count}](fg:#c4746e)"
+diverged = "[⇕ ⇡${ahead_count} ⇣${behind_count}](fg:#a292a3)"
+untracked = "[ ${count}](fg:#a292a3)"
+stashed = "[≡ ${count}](fg:#625e5a)"
+modified = "[ ${count}](fg:#d4a27f)"
+staged = "[✦ ${count}](fg:#8a9a7b)"
+renamed = "[» ${count}](fg:#8ea4a2)"
+deleted = "[✘ ${count}](fg:#c4746e)"
+
+[git_commit]
+format = "[ $hash$tag]($style)"
+style = "fg:#625e5a"
+commit_hash_length = 7
+tag_symbol = "  "
+tag_disabled = false
+only_detached = true
+
+[git_state]
+format = "[$state( $progress_current/$progress_total)]($style) "
+style = "fg:#c4746e"
+rebase = "rebasing"
+merge = "merging"
+revert = "reverting"
+cherry_pick = "cherry-picking"
+bisect = "bisecting"
+am = "applying"
+am_or_rebase = "am/rebase"
 
 [git_metrics]
-disabled = false
-added_style = "#8a9a7b"
-deleted_style = "#c4746e"
-format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+disabled = true
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              EXECUTION FEEDBACK
+# ══════════════════════════════════════════════════════════════════════════════
 
 [cmd_duration]
-min_time = 2_000
-style = "#625e5a"
-format = "took [$duration]($style) "
+min_time = 100
+format = " [$duration]($style) "
+style = "fg:#625e5a"
+show_milliseconds = false
+show_notifications = false
+
+# Execution dots based on duration:
+# < 100ms: nothing
+# 100ms-1s: shown
+# > 1s: shown with formatted time
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              TIME
+# ══════════════════════════════════════════════════════════════════════════════
 
 [time]
 disabled = false
-style = "#625e5a"
-format = "[$time]($style)"
+format = " [$time]($style) "
+style = "fg:#625e5a"
 time_format = "%H:%M"
+utc_time_offset = "local"
 
-[username]
-style_user = "#d4a27f"
-style_root = "bold #c4746e"
-format = "[$user]($style) in "
-show_always = false
-
-[hostname]
-ssh_only = true
-style = "#8ea4a2"
-format = "[@$hostname]($style) "
+# ══════════════════════════════════════════════════════════════════════════════
+#                              LANGUAGES - WITH ICONS
+# ══════════════════════════════════════════════════════════════════════════════
 
 [python]
 symbol = " "
-style = "#c4b28a"
-format = 'via [$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
+style = "fg:#8a9a7b"
+format = " [$symbol$version(\\($virtualenv\\))]($style)"
+pyenv_version_name = true
+detect_extensions = ["py", "pyi", "pyx"]
+detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", "setup.py", ".python-version"]
 
 [nodejs]
 symbol = " "
-style = "#8a9a7b"
-format = "via [$symbol($version )]($style)"
+style = "fg:#d4a27f"
+format = " [$symbol$version]($style)"
+detect_extensions = ["js", "mjs", "cjs", "ts", "tsx"]
+detect_files = ["package.json", ".node-version"]
+detect_folders = []
 
 [rust]
 symbol = " "
-style = "#d4a27f"
-format = "via [$symbol($version )]($style)"
+style = "fg:#c4746e"
+format = " [$symbol$version]($style)"
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml"]
 
 [golang]
 symbol = " "
-style = "#8ea4a2"
-format = "via [$symbol($version )]($style)"
+style = "fg:#8ea4a2"
+format = " [$symbol$version]($style)"
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum"]
 
 [java]
 symbol = " "
-style = "#c4746e"
-format = "via [$symbol($version )]($style)"
+style = "fg:#d4a27f"
+format = " [$symbol$version]($style)"
+detect_extensions = ["java", "kt", "kts", "scala"]
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]
+
+[lua]
+symbol = " "
+style = "fg:#c4b28a"
+format = " [$symbol$version]($style)"
+detect_extensions = ["lua"]
+detect_files = [".lua-version"]
+
+[ruby]
+symbol = " "
+style = "fg:#a292a3"
+format = " [$symbol$version]($style)"
+detect_extensions = ["rb"]
+detect_files = ["Gemfile", ".ruby-version"]
+
+[elixir]
+symbol = " "
+style = "fg:#a292a3"
+format = " [$symbol$version]($style)"
+detect_extensions = ["ex", "exs"]
+
+[php]
+symbol = " "
+style = "fg:#a292a3"
+format = " [$symbol$version]($style)"
+detect_extensions = ["php"]
+detect_files = ["composer.json"]
+
+[swift]
+symbol = " "
+style = "fg:#d4a27f"
+format = " [$symbol$version]($style)"
+detect_extensions = ["swift"]
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              CONTEXT INDICATORS
+# ══════════════════════════════════════════════════════════════════════════════
+
+[username]
+format = "[$user]($style)"
+style_user = "fg:#d4a27f"
+style_root = "bold fg:#c4746e"
+show_always = false
+
+[hostname]
+format = "[@$hostname]($style)"
+style = "fg:#8ea4a2"
+ssh_only = true
+ssh_symbol = " "
+trim_at = "."
+
+[sudo]
+disabled = false
+format = "[󰞀 ]($style)"
+style = "bold fg:#c4746e"
+symbol = "󰞀 "
+
+[jobs]
+format = "[$symbol$number]($style)"
+symbol = " "
+style = "fg:#a292a3"
+threshold = 1
+
+[status]
+disabled = false
+format = "[$symbol$status]($style)"
+symbol = "✘ "
+style = "fg:#c4746e"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              ENVIRONMENT CONTEXTS
+# ══════════════════════════════════════════════════════════════════════════════
+
+[docker_context]
+symbol = " "
+style = "fg:#8ea4a2"
+format = " [$symbol$context]($style)"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+
+[kubernetes]
+symbol = "󱃾 "
+style = "fg:#8ea4a2"
+format = " [$symbol$context(\\($namespace\\))]($style)"
+disabled = false
+detect_files = []
+detect_folders = []
+detect_env_vars = ["KUBECONFIG"]
+
+[aws]
+symbol = " "
+style = "fg:#d4a27f"
+format = " [$symbol($profile)(\\($region\\))]($style)"
+disabled = true
+
+[gcloud]
+symbol = " "
+style = "fg:#8ea4a2"
+format = " [$symbol$account(\\($project\\))]($style)"
+disabled = true
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              PACKAGE VERSION
+# ══════════════════════════════════════════════════════════════════════════════
 
 [package]
 symbol = "󰏗 "
-style = "#a292a3"
-format = "is [$symbol$version]($style) "
+style = "fg:#a292a3"
+format = " [$symbol$version]($style)"
+display_private = false
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              SHELL INDICATOR
+# ══════════════════════════════════════════════════════════════════════════════
+
+[shell]
+disabled = true
+bash_indicator = "bash"
+zsh_indicator = ""
+fish_indicator = "fish"
+powershell_indicator = "pwsh"
+format = "[$indicator]($style)"
+style = "fg:#625e5a"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              BATTERY (for laptops)
+# ══════════════════════════════════════════════════════════════════════════════
+
+[battery]
+disabled = true
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = "󰂑 "
+empty_symbol = "󰂎 "
+format = "[$symbol$percentage]($style)"
+
+[[battery.display]]
+threshold = 20
+style = "bold fg:#c4746e"
+
+[[battery.display]]
+threshold = 50
+style = "fg:#d4a27f"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              MEMORY USAGE
+# ══════════════════════════════════════════════════════════════════════════════
+
+[memory_usage]
+disabled = true
+format = " [$symbol$ram]($style)"
+symbol = "󰍛 "
+style = "fg:#625e5a"
+threshold = 75
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              NIX SHELL
+# ══════════════════════════════════════════════════════════════════════════════
+
+[nix_shell]
+symbol = " "
+style = "fg:#8ea4a2"
+format = " [$symbol$state(\\($name\\))]($style)"
+impure_msg = "impure"
+pure_msg = "pure"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#                              DISABLED MODULES
+# ══════════════════════════════════════════════════════════════════════════════
+
+[line_break]
+disabled = true
+
+[shlvl]
+disabled = true
+
+[singularity]
+disabled = true
+
+[vcsh]
+disabled = true
+
+[fossil_branch]
+disabled = true
+
+[hg_branch]
+disabled = true
+
+[pijul_channel]
+disabled = true
+
+[buf]
+disabled = true
+
+[c]
+disabled = true
+
+[cmake]
+disabled = true
+
+[cobol]
+disabled = true
+
+[conda]
+disabled = true
+
+[crystal]
+disabled = true
+
+[daml]
+disabled = true
+
+[dart]
+disabled = true
+
+[deno]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elm]
+disabled = true
+
+[env_var]
+disabled = true
+
+[erlang]
+disabled = true
+
+[fennel]
+disabled = true
+
+[guix_shell]
+disabled = true
+
+[gradle]
+disabled = true
+
+[haskell]
+disabled = true
+
+[helm]
+disabled = true
+
+[julia]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[meson]
+disabled = true
+
+[nim]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[opa]
+disabled = true
+
+[openstack]
+disabled = true
+
+[perl]
+disabled = true
+
+[pulumi]
+disabled = true
+
+[purescript]
+disabled = true
+
+[raku]
+disabled = true
+
+[red]
+disabled = true
+
+[rlang]
+disabled = true
+
+[scala]
+disabled = true
+
+[spack]
+disabled = true
+
+[terraform]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[vlang]
+disabled = true
+
+[zig]
+disabled = true
+
+[solidity]
+disabled = true
+
+[typst]
+disabled = true
+
+[gleam]
+disabled = true
+
+[quarto]
+disabled = true
