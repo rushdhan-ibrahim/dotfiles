@@ -112,7 +112,7 @@ zinit snippet "$ZSH_LIB/tools.zsh"
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Show neofetch on new terminal windows (skip in VS Code, scripts, non-interactive)
-if [[ -o interactive ]] && [[ -z "$VSCODE_INJECTION" ]] && [[ -z "$INSIDE_EMACS" ]] && [[ -z "$TERM_PROGRAM_VERSION" ]]; then
+if [[ -o interactive ]] && [[ -z "$VSCODE_INJECTION" ]] && [[ -z "$INSIDE_EMACS" ]]; then
     if command -v neofetch &>/dev/null; then
         neofetch
     fi
